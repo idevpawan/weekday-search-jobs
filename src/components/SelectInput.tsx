@@ -5,6 +5,7 @@ type TSelectInput = {
   placeholder?: string;
   isMulti?: boolean;
   maxWidth?: number;
+  minWidth?: number;
   onValueChange?:
     | any
     | { value: string; label: string }[]
@@ -12,7 +13,8 @@ type TSelectInput = {
 };
 
 function SelectInput(props: TSelectInput) {
-  const { options, placeholder, isMulti, onValueChange, maxWidth } = props;
+  const { options, placeholder, isMulti, onValueChange, maxWidth, minWidth } =
+    props;
 
   const colourStyles: StylesConfig = {
     control: (styles) => ({
@@ -26,7 +28,8 @@ function SelectInput(props: TSelectInput) {
     }),
     container: (styles) => ({
       ...styles,
-      width: maxWidth,
+      maxWidth: maxWidth,
+      minWidth: minWidth,
     }),
     option: (styles) => ({
       ...styles,

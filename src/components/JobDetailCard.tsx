@@ -1,6 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
-function JobDetailCard() {
+export type TJobDetailCard = {
+  companyName: string;
+  jdLink: string;
+  jdUid: string;
+  jobDetailsFromCompany: string;
+  jobRole: string;
+  location: string;
+  logoUrl: string;
+  maxExp: number | null;
+  maxJdSalary: number | null;
+  minExp: number | null;
+  minJdSalary: number | null;
+  salaryCurrencyCode: string;
+};
+
+function JobDetailCard(props: TJobDetailCard) {
   const [isExpandedContainer, setIsExpandedContainer] = useState(false);
   const heightRef = useRef(null) as any;
 
@@ -24,20 +39,31 @@ function JobDetailCard() {
           {/* company logo */}
           <img
             onError={(e) => (e.currentTarget.src = "")}
-            src="https://storage.googleapis.com/weekday-assets/airtableAttachment_1713598325603_7ico7.jpg"
+            src={props.logoUrl}
             alt="logo"
           />
           <div>
             {/* company name */}
-            <p className="company-name">FlexWash Techonologies</p>
+            <p className="company-name">{props.companyName}</p>
             {/* job title */}
-            <p className="job-title">Senior Engineer</p>
+            <p className="job-title">{props.jobRole}</p>
             {/* location */}
-            <p className="location">Bangalore</p>
+            <p className="location">{props.location}</p>
           </div>
         </div>
         {/* Estimated Salary */}
-        <p className="estimated-salary">Estimated Salary: ₹30 - 60 LPA ✅</p>
+        {props.maxJdSalary ? (
+          <p className="estimated-salary">
+            Estimated Salary:{" "}
+            {props.minJdSalary ? `₹${props.minJdSalary} -` : "Max"}{" "}
+            {props.maxJdSalary} LPA ✅
+          </p>
+        ) : (
+          <p className="estimated-salary">
+            Estimated Salary:{" "}
+            {props.minJdSalary ? `Max ₹${props.minJdSalary} LPA ✅` : "N/A"}
+          </p>
+        )}
         {/* About company */}
         <div className="relative">
           <div
@@ -48,28 +74,39 @@ function JobDetailCard() {
           >
             <p className="about-company-text">About Company:</p>
             <p className="about-us-text">About us</p>
-            <p className="company-info">
-              Flex Wash is an operating system for the car wash industry. Our
-              solutions help owners manage their operations and grow revenue.
-              Our POS has a built-in CRM, allowing car washes to take advantage
-              of their customer transaction history in order to funnel customers
-              into subscriptions and higher margin wash packages..
-            </p>
+            <p className="company-info">{props.jobDetailsFromCompany}</p>
             <p>&nbsp;</p>
             <p className="profile-text">Founder/Recruiter profiles:</p>
-            <p className="profile-name">Chirag Singh Toor</p>
+            <p className="profile-name">John Doe</p>
             <p className="about-company-text about-company-role">About Role:</p>
             <p className="about-us-text">About us</p>
           </div>
           {isExpandedContainer && <p className="view-more-text">View job</p>}
         </div>
         {/* experience */}
-        <div className="min-experience">
-          <p>Minimum Experience</p>
-          <p>5 years</p>
-        </div>
+        {props.minExp ? (
+          <div className="min-experience">
+            <p>Minimum Experience</p>
+            <p>{props.minExp} years</p>
+          </div>
+        ) : (
+          <div className="min-experience"></div>
+        )}
         {/* apply button */}
-        <button className="easy-apply-btn">⚡️ Easy Apply</button>
+        <button
+          onClick={() => window.open(props.jdLink, "_blank")}
+          className="easy-apply-btn"
+        >
+          ⚡️ Easy Apply
+        </button>
+        {/* referral button */}
+        <button className="referral-btn">
+          <img
+            src="https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8"
+            alt=""
+          />
+          <p>Ask for referral</p>
+        </button>
       </div>
     </div>
   );

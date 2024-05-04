@@ -82,12 +82,14 @@ p {
 .job-box .company-job-info .job-title {
   font-size: 14px;
   line-height: 1.5;
+  text-transform: capitalize;
 }
 
 .job-box .company-job-info .location {
   font-size: 11px;
   font-weight: 400;
   margin-top: 5px;
+  text-transform: capitalize;
 }
 
 .job-box .container .estimated-salary {
@@ -104,7 +106,6 @@ p {
 .about-company-role {
   margin-top: 14px !important;
 }
-
 .overflow-mask {
   max-height: 250px;
   overflow: hidden;
@@ -114,23 +115,20 @@ p {
     rgba(255, 255, 255, 0)
   );
 }
-
 .view-more-text {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  bottom: 15px;
+  bottom: 0px;
   color: #4943da;
   font-size: 14px;
   cursor: pointer;
 }
-
 .about-company .about-company-text {
   font-size: 1rem;
   font-weight: 400;
   margin-top: 2px;
 }
-
 .about-company .profile-text {
   font-weight: 500;
   white-space: pre-wrap;
@@ -147,7 +145,10 @@ p {
   font-weight: 600;
   margin: 1px 0;
 }
-
+.min-experience {
+  min-height: 38px;
+  margin-top: 20px;
+}
 .min-experience p:first-child {
   font-size: 13px;
   font-weight: 500;
@@ -159,7 +160,6 @@ p {
 .min-experience p:nth-child(2) {
   font-size: 14px;
 }
-
 .easy-apply-btn {
   width: 100%;
   background-color: rgb(85, 239, 196);
@@ -172,4 +172,57 @@ p {
   cursor: pointer;
   font-size: 16px;
   font-family: "Lexend", sans-serif;
+}
+.referral-btn {
+  width: 100%;
+  background-color: #4943da;
+  color: #fff;
+  font-weight: 300;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 0;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Lexend", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.referral-btn img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
+
+/* app styles */
+.search-jobs-text {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+.filters-container input {
+  padding: 8px;
+  font-family: "Lexend", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  border-radius: 5px;
+  border: 1px solid rgb(193, 193, 193);
+  outline: none;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
 }
