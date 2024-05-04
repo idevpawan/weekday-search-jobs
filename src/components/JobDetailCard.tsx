@@ -5,10 +5,11 @@ function JobDetailCard() {
   const heightRef = useRef(null) as any;
 
   useEffect(() => {
+    // checking if the about us container height exceeds 250px
+    // if it's exceeding then changing the state of isExpandedContainer to true
     if (heightRef.current?.offsetHeight > 250) {
       setIsExpandedContainer(true);
     }
-    console.log(heightRef.current?.offsetHeight);
   }, []);
 
   return (

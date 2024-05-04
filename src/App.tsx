@@ -1,9 +1,15 @@
-import JobDetailCard from "./components/JobDetailCard";
+import SelectInput from "./components/SelectInput";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 function App() {
   return (
     <div>
-      <JobDetailCard />
+      <SelectInput options={options} placeholder="Minimum Base Salary" />
     </div>
   );
 }
