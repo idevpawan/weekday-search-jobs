@@ -103,8 +103,6 @@ function App() {
     };
   }, [observerTarget, newOffsetValue]);
 
-  console.log(filters);
-
   return (
     <div>
       <p className="search-jobs-text">Search Jobs</p>
