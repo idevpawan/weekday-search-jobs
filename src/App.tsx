@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JobDetailCard, { TJobDetailCard } from "./components/JobDetailCard";
 import SelectInput from "./components/SelectInput";
 import LoadingCircle from "./components/LoadingCircle";
@@ -9,8 +9,9 @@ import { filterJobCards } from "./utils";
 function App() {
   const numberOfCards = 12; // this can be change to get desired number of cards at a time
   const [jobs, setJobs] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [cardLength, setCardLength] = useState(numberOfCards);
+  const [isLoading, setIsLoading] = useState(true);
+  const [cardLength, setCardLength] = useState<number>(0);
+  const [newOffsetValue, setnewOffsetValue] = useState<number>(0);
   const [filters, setFilters] = useState({
     jobRole: [],
     minExp: undefined,
@@ -18,6 +19,7 @@ function App() {
     minJdSalary: undefined,
     companyName: "",
   });
+  const observerTarget = useRef(null);
 
   const handleRoleChange = (selectedRoles: any) => {
     const roles = selectedRoles.map((role: { value: any }) => role.value);
@@ -54,7 +56,7 @@ function App() {
 
     const body = JSON.stringify({
       limit: numberOfCards,
-      offset: cardLength - numberOfCards, // fetching only next 12 items
+      offset: cardLength, // fetching only next 12 items
     });
 
     const requestOptions = {
@@ -71,7 +73,9 @@ function App() {
       const data = await response.json();
       // keeping the previous values with new values
       setJobs((prevItems: any[]) => [...prevItems, ...data.jdList]);
-      setCardLength((prevValue) => prevValue + numberOfCards);
+      // const newOffest = cardLength + data.jdList.length;
+      setnewOffsetValue((prev) => prev + data.jdList.length);
+      setCardLength(cardLength + data.jdList.length);
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,28 +84,26 @@ function App() {
   };
 
   useEffect(() => {
-    if (!jobs.length && !isLoading) {
-      fetchJobs();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchJobs();
+        }
+      },
+      { threshold: 1 }
+    );
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
     }
-  }, [jobs, isLoading]);
 
-  // infinite scrolling
-  const handleScroll = () => {
-    // checking if user reaches the end of the page and fetching items
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight ||
-      isLoading
-    ) {
-      return;
-    }
-    fetchJobs();
-  };
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [observerTarget, newOffsetValue]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll); // listening scroll event
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLoading]);
+  console.log(filters);
 
   return (
     <div>
@@ -151,6 +153,7 @@ function App() {
           </div>
         )}
       </div>
+      {filters.companyName.length ? <div /> : <div ref={observerTarget}></div>}
       {isLoading && jobs.length ? (
         <div className="infinite-loader-container">
           <LoadingCircle />

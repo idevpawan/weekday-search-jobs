@@ -216,23 +216,34 @@ p {
   justify-content: center;
 }
 
-@media screen and (max-width: 1024px) {
-  .filters-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 .filters-container input {
   padding: 8px;
   font-family: "Lexend", sans-serif;
   font-weight: 300;
   font-size: 13px;
   border-radius: 5px;
-  border: 1px solid rgb(193, 193, 193);
+  border: 1px solid rgba(193, 193, 193, 0.858);
   outline: none;
   max-width: 150px;
   width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .filters-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .filters-container input {
+    max-width: 95%;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .filters-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 
 .cards-container {
