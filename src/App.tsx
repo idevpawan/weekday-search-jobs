@@ -151,7 +151,7 @@ function App() {
           </div>
         )}
       </div>
-      {filters.companyName.length ? <div /> : <div ref={observerTarget}></div>}
+      {!filters.companyName.length && <div ref={observerTarget}></div>}
       {isLoading && jobs.length ? (
         <div className="infinite-loader-container">
           <LoadingCircle />
