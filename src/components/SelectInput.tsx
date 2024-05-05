@@ -6,10 +6,7 @@ type TSelectInput = {
   isMulti?: boolean;
   maxWidth?: number;
   minWidth?: number;
-  onValueChange?:
-    | any
-    | { value: string; label: string }[]
-    | { value: string; label: string };
+  onValueChange?: any;
 };
 
 function SelectInput(props: TSelectInput) {
@@ -48,7 +45,9 @@ function SelectInput(props: TSelectInput) {
       placeholder={placeholder}
       isMulti={isMulti}
       isClearable
-      onChange={onValueChange}
+      onChange={
+        isMulti ? onValueChange : (e: any) => onValueChange?.(String(e?.value))
+      }
     />
   );
 }

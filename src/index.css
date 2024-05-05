@@ -6,7 +6,7 @@ body {
   font-weight: 300;
   margin: 0;
   box-sizing: border-box;
-  padding: 50px;
+  padding: 30px;
   max-width: 1920px;
   width: 100%;
   margin: auto;
@@ -231,7 +231,7 @@ p {
   border-radius: 5px;
   border: 1px solid rgb(193, 193, 193);
   outline: none;
-  max-width: 220px;
+  max-width: 150px;
   width: 100%;
 }
 
@@ -284,4 +284,16 @@ p {
   animation-duration: 0.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+.nothing-found img {
+  max-width: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 24px auto;
+}
+.nothing-found p {
+  text-align: center;
+  font-weight: 500;
 }
