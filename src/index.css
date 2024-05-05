@@ -231,6 +231,8 @@ p {
   border-radius: 5px;
   border: 1px solid rgb(193, 193, 193);
   outline: none;
+  max-width: 220px;
+  width: 100%;
 }
 
 .cards-container {
@@ -239,4 +241,47 @@ p {
   justify-content: center;
   gap: 30px;
   margin-top: 40px;
+}
+
+.infinite-loader-container {
+  margin-top: 20px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.load {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto 0;
+  border: solid 3px rgb(85, 239, 196);
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  -webkit-transition: all 0.5s ease-in;
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+
+  transition: all 0.5s ease-in;
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
