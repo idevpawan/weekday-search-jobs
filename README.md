@@ -2,8 +2,8 @@
 
 Welcome to Weekday Search Jobs! This project aims to provide a convenient way to search for jobs based on weekdays. Follow the steps below to get started.
 
-###Live Preview
-[a link](https://weekday-search-jobs.vercel.app/)
+### Live Preview
+[Click to Preview](https://weekday-search-jobs.vercel.app/)
 
 ## Getting Started
 
