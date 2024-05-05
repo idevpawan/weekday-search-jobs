@@ -15,6 +15,12 @@ body {
   /* scroll-margin-top: 90px; */
 }
 
+@media screen and (max-width: 558px) {
+  body {
+    padding: 20px 10px;
+  }
+}
+
 .relative {
   position: relative;
 }
@@ -209,6 +215,14 @@ p {
   gap: 5px;
   justify-content: center;
 }
+
+@media screen and (max-width: 1024px) {
+  .filters-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .filters-container input {
   padding: 8px;
   font-family: "Lexend", sans-serif;
