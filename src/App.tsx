@@ -101,7 +101,11 @@ function App() {
         observer.unobserve(observerTarget.current);
       }
     };
-  }, [observerTarget, newOffsetValue]);
+  }, [newOffsetValue, filteredJobCards.length]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <div>
@@ -140,18 +144,27 @@ function App() {
       <div className="cards-container">
         {isLoading && !jobs.length ? (
           <LoadingCircle />
-        ) : filteredJobCards.length > 0 ? (
-          filteredJobCards?.map((job: TJobDetailCard, i) => {
-            return <JobDetailCard key={i} {...job} />;
-          })
         ) : (
+          filteredJobCards.length > 0 && (
+            <>
+              {filteredJobCards?.map((job: TJobDetailCard, i) => {
+                return <JobDetailCard key={i} {...job} />;
+              })}
+            </>
+          )
+        )}
+        {filteredJobCards.length > 0 && filters.companyName.length === 0 && (
+          <div ref={observerTarget}></div>
+        )}
+      </div>
+      <div>
+        {filteredJobCards.length === 0 && (
           <div className="nothing-found">
             <img src={NothingFoundImg} alt="" />
             <p>No Jobs available for this category at the moment</p>
           </div>
         )}
       </div>
-      {!filters.companyName.length && <div ref={observerTarget}></div>}
       {isLoading && jobs.length ? (
         <div className="infinite-loader-container">
           <LoadingCircle />
